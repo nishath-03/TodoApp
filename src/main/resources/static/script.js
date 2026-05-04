@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/todos";
+const API_URL = "/todos";
 
 let allTodos = [];
 
