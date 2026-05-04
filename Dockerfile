@@ -1,13 +1,20 @@
+# Use Java 21
 FROM eclipse-temurin:21-jdk
 
+# Set working directory
 WORKDIR /app
+
+# Copy everything
 COPY . .
 
-# 🔥 FIX: give permission to mvnw
+# Give permission to mvnw
 RUN chmod +x mvnw
 
-# build project
+# Build the project (skip tests for faster build)
 RUN ./mvnw clean package -DskipTests
 
-# run app
-CMD ["java", "-jar", "target/*.jar"]
+# Expose port (Render uses 8080 internally)
+EXPOSE 8080
+
+# Run the app (wildcard handled properly)
+CMD ["sh", "-c", "java -jar target/*.jar"]
